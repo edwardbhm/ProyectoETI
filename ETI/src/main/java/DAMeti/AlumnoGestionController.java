@@ -67,7 +67,7 @@ public class AlumnoGestionController {
                         resultSet.getString("nombre_madre_padre"),
                         resultSet.getString("nombre_tutor"),
                         resultSet.getString("usuario"),
-                        null // No se usa el password aquí
+                        null 
                 );
                 listaAlumnos.add(alumno);
             }

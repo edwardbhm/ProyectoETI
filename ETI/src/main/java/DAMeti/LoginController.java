@@ -27,9 +27,9 @@ public class LoginController {
     @FXML
     private PasswordField txtContra;
     
-    private static final String URL = "jdbc:mysql://localhost:3306/eti"; // Ajusta el nombre de la base de datos
-    private static final String USUARIO = "root"; // Ajusta el usuario de la base de datos
-    private static final String CONTRASEÑA = ""; // Ajusta la contraseña si es necesario
+    private static final String URL = "jdbc:mysql://localhost:3306/eti"; 
+    private static final String USUARIO = "root"; 
+    private static final String CONTRASEÑA = ""; 
     
     // Método para establecer la conexión a la base de datos
     public static Connection dameConexion() throws SQLException {
@@ -45,9 +45,8 @@ public class LoginController {
         return conexion;
     }
 
-    // Verifica las credenciales del usuario contra la base de datos
     private boolean verificarCredenciales(String usuario, String contraseña) {
-        String sql = "SELECT * FROM alumnos WHERE usuario = ? AND contrasena = ?"; // Cambiado a 'contrasena' sin ñ
+        String sql = "SELECT * FROM alumnos WHERE usuario = ? AND contrasena = ?"; 
         
         try (Connection connection = dameConexion();
              PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -55,7 +54,7 @@ public class LoginController {
             stmt.setString(2, contraseña);
             ResultSet resultSet = stmt.executeQuery();
             
-            return resultSet.next(); // Si encuentra el usuario y la contraseña, devuelve true
+            return resultSet.next(); 
         } catch (SQLException e) {
             mostrarError("Error de conexión a la base de datos", "No se pudo conectar a la base de datos.");
             e.printStackTrace();
@@ -63,7 +62,6 @@ public class LoginController {
         }
     }
 
-    // Maneja el botón de inicio de sesión
     @FXML
     private void handleLoginButtonAction(ActionEvent event) {
         String usuario = txtUsuario.getText();
@@ -75,7 +73,6 @@ public class LoginController {
             boolean autenticado = verificarCredenciales(usuario, contraseña);
 
             if (autenticado) {
-                // Ruta corregida a bienvenidoAlumno.fxml
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/DAM/ETI/bienvenidoAlumno.fxml"));
                 try {
                     Parent root = loader.load();
@@ -93,19 +90,16 @@ public class LoginController {
         }
     }
 
-    // Maneja el botón "Volver"
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
         cambiarEscena((Stage) ((Node) event.getSource()).getScene().getWindow(), "/DAM/ETI/alumno1.fxml");
     }
 
-    // Maneja el botón "Inicio"
     @FXML
     private void handleInicioButtonAction(ActionEvent event) {
         cambiarEscena((Stage) ((Node) event.getSource()).getScene().getWindow(), "/DAM/ETI/inicio.fxml");
     }
 
-    // Maneja el evento "Olvidé mi contraseña"
     @FXML
     private void handleOlvidoContrasenaAction(ActionEvent event) {
         String usuario = txtUsuario.getText();
@@ -115,7 +109,6 @@ public class LoginController {
             return;
         }
 
-        // Dialog para verificar el nombre del padre/madre
         TextField txtNombrePadreMadre = new TextField();
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Recuperación de contraseña");
@@ -156,7 +149,6 @@ public class LoginController {
         PasswordField txtNuevaContrasena = new PasswordField();
         PasswordField txtConfirmarContrasena = new PasswordField();
 
-        // Configurar mensaje y campos en una caja vertical
         VBox vbox = new VBox(10);
         txtNuevaContrasena.setPromptText("Nueva contraseña");
         txtConfirmarContrasena.setPromptText("Confirmar contraseña");
@@ -167,12 +159,10 @@ public class LoginController {
         alert.setHeaderText("Introduce tu nueva contraseña dos veces");
         alert.getDialogPane().setContent(vbox);
 
-        // Mostrar el cuadro de diálogo y esperar la entrada del usuario
         alert.showAndWait().ifPresent(response -> {
             String nuevaContrasena = txtNuevaContrasena.getText();
             String confirmarContrasena = txtConfirmarContrasena.getText();
 
-            // Verificar si ambos campos coinciden y no están vacíos
             if (!nuevaContrasena.isEmpty() && nuevaContrasena.equals(confirmarContrasena)) {
                 actualizarContrasena(usuario, nuevaContrasena);
                 mostrarAlerta(AlertType.INFORMATION, "Contraseña actualizada", "La contraseña se ha actualizado correctamente. Se enviará un correo a su padre/madre con la nueva contraseña.");
@@ -182,7 +172,6 @@ public class LoginController {
         });
     }
 
-    // Actualiza la contraseña del usuario en la base de datos
     private void actualizarContrasena(String usuario, String nuevaContrasena) {
         String sql = "UPDATE alumnos SET contrasena = ? WHERE usuario = ?";
 
@@ -201,7 +190,6 @@ public class LoginController {
         }
     }
 
-    // Método para cambiar la escena
     private void cambiarEscena(Stage stage, String rutaFXML) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(rutaFXML));
@@ -213,7 +201,6 @@ public class LoginController {
         }
     }
 
-    // Muestra alertas simples
     private void mostrarAlerta(AlertType tipo, String titulo, String mensaje) {
         Alert alert = new Alert(tipo);
         alert.setTitle(titulo);
@@ -222,7 +209,6 @@ public class LoginController {
         alert.showAndWait();
     }
 
-    // Muestra errores críticos
     private void mostrarError(String titulo, String mensaje) {
         mostrarAlerta(AlertType.ERROR, titulo, mensaje);
     }

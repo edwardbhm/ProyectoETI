@@ -53,7 +53,6 @@ public class App extends Application {
 
     public static void changeScene(Stage stage, String fxmlPath) {
         try {
-            // Agregar la escena actual a la pila solo si es diferente de la que ya está en la pila
             if (!sceneHistory.isEmpty() && stage.getScene() != sceneHistory.peek()) {
                 pushScene(stage.getScene());
             }

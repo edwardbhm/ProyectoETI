@@ -32,7 +32,6 @@ public class Admin2Controller {
 
     @FXML
     private void initialize() {
-        // Puedes agregar inicializaciones si es necesario
     }
 
     @FXML
@@ -44,8 +43,8 @@ public class Admin2Controller {
 
             // Obtener el controlador de AlumnoGestionController
             AlumnoGestionController controller = loader.getController();
-            controller.cargarDatos(); // Asegúrate de que este método sea público en el controlador de AlumnoGestion
-
+            controller.cargarDatos(); 
+            
             // Crear una nueva escena y mostrarla en un nuevo escenario
             Stage stage = new Stage();
             stage.setTitle("Gestionar Alumnos");
@@ -63,19 +62,16 @@ public class Admin2Controller {
 
     @FXML
     private void handleGestionarLibroButtonAction(ActionEvent event) {
-        // Lógica para gestionar libros (similar a gestionar usuarios)
         closeWindow(event);
     }
 
     @FXML
     private void handleGestionarPeticionButtonAction(ActionEvent event) {
-        // Lógica para gestionar peticiones
         closeWindow(event);
     }
 
     @FXML
     private void handleGestionarPrestamoButtonAction(ActionEvent event) {
-        // Lógica para gestionar préstamos
         closeWindow(event);
     }
 
@@ -90,11 +86,8 @@ public class Admin2Controller {
     	App.changeScene((Stage) ((Node) event.getSource()).getScene().getWindow(), "/DAM/ETI/inicio.fxml");
     }
 
-    // Método para cerrar la ventana
     private void closeWindow(ActionEvent event) {
-        // Obtiene el stage (ventana actual)
         Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-        // Cierra la ventana
         stage.close();
     }
 }

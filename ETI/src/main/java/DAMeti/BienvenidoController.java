@@ -25,17 +25,14 @@ public class BienvenidoController {
 
     @FXML
     private void handleConsultarCuentaAction(ActionEvent event) {
-        // Código para navegar a la pantalla de "Consultar mi cuenta"
         cambiarEscena((Stage) ((Node) event.getSource()).getScene().getWindow(), "/DAM/ETI/consultarCuenta.fxml");
     }
 
     @FXML
     private void handlePedirLibroAction(ActionEvent event) {
-        // Código para navegar a la pantalla de "Pedir libro"
         cambiarEscena((Stage) ((Node) event.getSource()).getScene().getWindow(), "/DAM/ETI/pedirLibro.fxml");
     }
 
-    // Método para cambiar la escena
     private void cambiarEscena(Stage stage, String rutaFXML) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource(rutaFXML));
@@ -47,7 +44,6 @@ public class BienvenidoController {
         }
     }
 
-    // Muestra errores críticos
     private void mostrarError(String titulo, String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(titulo);

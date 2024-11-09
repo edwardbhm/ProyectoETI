@@ -15,7 +15,7 @@ public class AlumnoFormControlador {
     @FXML
     private TextField txtNombre;
     @FXML
-    private ComboBox<Integer> comboCurso; // Cambiado a ComboBox<Integer>
+    private ComboBox<Integer> comboCurso; 
     @FXML
     private TextField txtTutor;
     @FXML
@@ -27,17 +27,16 @@ public class AlumnoFormControlador {
     private Button btnCancelar;
 
     private Alumno alumno;
-    private boolean modificado = false;  // Bandera para indicar si el alumno fue modificado
+    private boolean modificado = false;  
 
     public void initAttributes(Alumno alumno) {
         this.alumno = alumno;
 
-        // Agrega los números de curso al ComboBox
         comboCurso.getItems().addAll(1, 2, 3, 4, 5, 6);
 
         if (alumno != null) {
             txtNombre.setText(alumno.getNombre());
-            comboCurso.setValue(alumno.getCurso());  // Set el valor del curso actual
+            comboCurso.setValue(alumno.getCurso());  
             txtTutor.setText(alumno.getTutor());
             txtUsuario.setText(alumno.getUsuario());
         }
@@ -58,7 +57,7 @@ public class AlumnoFormControlador {
                 alumno.setTutor(txtTutor.getText());
                 alumno.setUsuario(txtUsuario.getText());
 
-                modificado = true;  // Indicar que el alumno fue modificado
+                modificado = true;  
 
                 Stage stage = (Stage) btnGuardar.getScene().getWindow();
                 stage.close();
@@ -70,13 +69,13 @@ public class AlumnoFormControlador {
 
     @FXML
     private void cancelar() {
-        modificado = false;  // Si se cancela, no se considera ninguna modificación
+        modificado = false; 
         Stage stage = (Stage) btnCancelar.getScene().getWindow();
         stage.close();
     }
 
     public Alumno getAlumno() {
-        return modificado ? alumno : null;  // Solo devuelve el alumno si fue modificado
+        return modificado ? alumno : null;  
     }
 
     private void showAlert(String title, String message) {
