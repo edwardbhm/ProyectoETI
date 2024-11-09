@@ -15,7 +15,7 @@ public class BienvenidoController {
 
     @FXML
     private void handleBackButtonAction(ActionEvent event) {
-        cambiarEscena((Stage) ((Node) event.getSource()).getScene().getWindow(), "/DAM/ETI/alumno1.fxml");
+        cambiarEscena((Stage) ((Node) event.getSource()).getScene().getWindow(), "/DAM/ETI/login.fxml");
     }
 
     @FXML
