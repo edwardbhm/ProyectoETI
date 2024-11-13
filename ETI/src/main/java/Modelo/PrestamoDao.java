@@ -9,4 +9,3 @@ public interface PrestamoDao {
    List<Prestamo> listarPrestamos();
    List<Prestamo> listarPrestamosPorAlumno(int idAlumno);
 }
-
